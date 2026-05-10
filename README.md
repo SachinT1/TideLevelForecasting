@@ -1,5 +1,4 @@
-# Writing the final README.md file
-readme_content = """# Physics-Informed BiGRU Tidal Forecasting
+# Physics Inspired Bi-Directional GRU for Tidal Forecasting
 
 This project implements a hybrid forecasting architecture that combines Harmonic Analysis (Astronomical Physics) with a Bidirectional Gated Recurrent Unit (BiGRU). By feeding the model both historical observations and physical tidal constituents, the system achieves stable, long-term forecasts that respect the periodic nature of ocean tides while learning local environmental residuals.
 
