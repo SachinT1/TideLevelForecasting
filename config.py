@@ -8,6 +8,7 @@ SCALER_PATH = "/data/scaler.pkl"
 DB_PATH = "/data/phy_bigru_study.db"
 BEST_PARAMS_PATH = "/data/best_params.json"
 MODEL_SAVE_PREFIX = "/data/best_model_trial_"
+TRAINED_MODEL = 'best_phy_bigru_final.pth'
 
 # ==========================================
 # 2. TIME-SERIES & SEQUENCE SETTINGS
