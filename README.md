@@ -17,11 +17,10 @@ This project implements a hybrid forecasting architecture that combines Harmonic
 
 ##  Steps to Run the Project
 
-1. Preprocessing: Prepare the data and extract harmonic constituents using preprocess.py . The data should be in the form date-time , value. The
-2. processed data will have time, value and the y_physics column ( harmonic analysis produced prediction)
-
-3. Training: Optimize hyperparameters and train the model. --> train_eval.py
-4. Validation: Run the backtest.py script to verify recursive stability --> prediciting forecast of 5 days
+1. Preprocessing: Prepare the data and extract harmonic constituents using preprocess.py . The data should be in the form date-time , value. The processed data will have time, value and the y_physics column ( harmonic analysis produced prediction)
+2. Training: Optimize hyperparameters and train the model. --> train_eval.py
+Model is also run with 24-h ground truth context [ Single Point Forecasts] for calculating RMSE
+3. Validation: Run the backtest.py script to verify recursive stability -->  forecast of 5 days
 
 ## ENVIRONMENT SETUP
 This project requires Python 3.10+ and the following libraries:-
