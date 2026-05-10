@@ -5,7 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 import joblib
 import config 
 
-# Import your new physics engine
+
 from harmonics import solve_harmonics
 
 def run_preprocessing():
@@ -23,8 +23,7 @@ def run_preprocessing():
     df_pristine = df_hourly[block_ids == longest_block_id].dropna().copy()
 
     print("--- Step 3: Generating y_phy (Physics Engine) ---")
-    # Pass the numpy array directly to your module
-    # verbose=True will print the M2/S2 amplitudes to your console!
+    
     df_pristine['s_tide_pred'] = solve_harmonics(df_pristine['observed_level'].values, verbose=True)
 
     print("--- Step 4: Normalization & Saving Scaler ---")
