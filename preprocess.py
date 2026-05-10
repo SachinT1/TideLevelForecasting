@@ -14,13 +14,34 @@ def run_preprocessing():
     df['time'] = pd.to_datetime(df['time'], dayfirst=True, format='mixed', errors='coerce')
     df = df.dropna(subset=['time']).sort_values(by='time').set_index('time')
 
-    print("--- Step 2: Extracting the Largest Pristine Chunk ---")
+    print("--- Step 2: Extracting the Largest Continuous Chunk ---")
+    print("--- Step 2: Extracting the Largest Continuous Chunk ---")
     df_hourly = df.resample('h').mean()
+
+    """ 
+    GUIDE FOR DATA GAPS:
+    The logic below performs 'Extraction', finding the single longest 
+    uninterrupted sequence of data.
+    
+    If you want to 'piece together' chunks or fill small gaps, 
+    COMMENT OUT the lines between START and END below, and use:
+    
+    df_hourly['observed_level'] = df_hourly['observed_level'].interpolate(method='linear', limit=3)
+    df_pristine = df_hourly.dropna().copy()
+    """
+
+    # --- START OF EXTRACTION LOGIC ---
     mask = df_hourly['observed_level'].isna()
     block_ids = mask.cumsum()
     valid_data = df_hourly[~mask]
+    
+    # Identify the ID of the block with the most rows
     longest_block_id = valid_data.groupby(block_ids).size().idxmax()
+    
+    # Filter the dataframe to only include that specific continuous block
     df_pristine = df_hourly[block_ids == longest_block_id].dropna().copy()
+    # --- END OF EXTRACTION LOGIC ---
+    
 
     print("--- Step 3: Generating y_phy (Physics Engine) ---")
     
