@@ -15,7 +15,7 @@ def run_preprocessing():
     df = df.dropna(subset=['time']).sort_values(by='time').set_index('time')
 
     print("--- Step 2: Extracting the Largest Continuous Chunk ---")
-    print("--- Step 2: Extracting the Largest Continuous Chunk ---")
+    
     df_hourly = df.resample('h').mean()
 
     """ 
