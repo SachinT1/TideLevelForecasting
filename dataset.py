@@ -23,7 +23,7 @@ class TideDataset(Dataset):
         return len(self.data) - self.seq_length - self.forecast_horizon + 1
         
     def __getitem__(self, idx):
-        # 2. UPDATED: x now contains 2 features for each hour in the sequence
+        
         # Slice shape: (seq_length, 2)
         x = self.features[idx : idx + self.seq_length]
         
@@ -31,7 +31,7 @@ class TideDataset(Dataset):
         y_true = self.observed[target_idx]
         y_phy = self.s_tide[target_idx]
         
-        # 3. UPDATED: We no longer need unsqueeze(-1) because x is already 2D
+        
         x_tensor = torch.tensor(x, dtype=torch.float32) 
         y_true_tensor = torch.tensor([y_true], dtype=torch.float32)
         y_phy_tensor = torch.tensor([y_phy], dtype=torch.float32)
