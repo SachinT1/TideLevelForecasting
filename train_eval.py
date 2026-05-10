@@ -6,7 +6,7 @@ import json
 import os
 import numpy as np
 
-# Import our custom modules
+
 import config
 from dataset import get_chronological_dataloaders
 from model import PhyBiGRU, physics_informed_loss
@@ -21,7 +21,7 @@ def objective(trial, train_loader, val_loader, device):
     lr = trial.suggest_float("lr", config.LR_MIN, config.LR_MAX, log=True)
     
     # 2. Initialize Model & Optimizer
-    # Ensure config.INPUT_DIM is set to 2 in your config.py!
+    
     model = PhyBiGRU(input_dim=config.INPUT_DIM, hidden_dim=config.HIDDEN_DIM, num_layers=config.NUM_LAYERS).to(device)
     optimizer = optim.Adam(model.parameters(), lr=lr)
     
@@ -43,7 +43,7 @@ def objective(trial, train_loader, val_loader, device):
         model.eval()
         val_rmse = 0.0
         with torch.no_grad():
-            # UPDATED: Unpack all three values from the new dataloader
+            
             for x_b, y_t, _ in val_loader:
                 x_b, y_t = x_b.to(device), y_t.to(device)
                 y_pred = model(x_b)
@@ -90,7 +90,7 @@ def evaluate_best_model(best_trial_number, test_loader, device):
         data_arr = np.array(data_list).flatten()
         c_min = scaler.min_[col_idx]
         c_scale = scaler.scale_[col_idx]
-        # Formula: x_real = (x_scaled - min) / scale
+        
         return (data_arr - c_min) / c_scale
 
     preds_meters = manual_inverse(predictions, 0)
